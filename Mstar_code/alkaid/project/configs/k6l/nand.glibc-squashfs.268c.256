@@ -1,0 +1,13 @@
+CHIP = k6l
+BOARD = 268C
+BOARD_NAME = MST268C-D01A-S
+TOOLCHAIN = glibc
+TOOLCHAIN_VERSION = 4.7.2
+KERNEL_VERSION = 3.10.40
+KERNEL_CONFIG = glibc-squashfs
+IMAGE_CONFIG = nand.squashfs.glibc.nvr.mma
+CUSTOMER_OPTIONS = 268c.256_options.mk
+CUSTOMER_TAILOR = default_tailor.mk
+MMAP = SN_MMAP_DTV_MM_K6LITE_256.h
+MHAL = simulation k6l
+TOOLCHAIN_REL = arm-none-linux-gnueabi-

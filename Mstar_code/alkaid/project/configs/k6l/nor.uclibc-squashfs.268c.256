@@ -1,0 +1,13 @@
+CHIP = k6l
+BOARD = 268C
+BOARD_NAME = MST268C-D01A-S
+TOOLCHAIN = uclibc
+TOOLCHAIN_VERSION = 0.1
+KERNEL_VERSION = 3.10.40
+KERNEL_CONFIG = norflash
+IMAGE_CONFIG = nor.squashfs.uclibc.nvr.mma
+CUSTOMER_OPTIONS = 268c.256_options.mk
+CUSTOMER_TAILOR = k6l/uclibc_tailor.mk
+MMAP = SN_MMAP_DTV_MM_K6LITE_256.h
+MHAL = simulation k6l
+TOOLCHAIN_REL = arm-buildroot-linux-uclibcgnueabi-

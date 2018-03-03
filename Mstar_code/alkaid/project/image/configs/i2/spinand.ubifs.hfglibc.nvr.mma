@@ -1,0 +1,28 @@
+IMAGE_LIST = kernel rootfs nvrservice customer
+
+FLASH_TYPE = spinand
+UBI_MLC_TYPE = 0
+PAT_TABLE  = ubi
+BUSYBOX    = busybox-1.20.2-arm-linux-gnueabihf-glibc
+LIBC       = libc-2.19
+
+kernel$(RESOUCE)   = $(PROJ_ROOT)/release/$(CHIP)/$(BOARD)/$(TOOLCHAIN)/$(TOOLCHAIN_VERSION)/bin/kernel/$(FLASH_TYPE)/uImage.xz
+kernel$(PATSIZE)   = 0x500000
+kernel$(BOOTENV)   = $(KERNEL_BOOT_ENV)
+
+rootfs$(RESOUCE)   = $(OUTPUTDIR)/rootfs
+rootfs$(FSTYPE)    = ubifs
+rootfs$(PATSIZE)   = 0x2000000
+rootfs$(BOOTENV)   = ubi.mtd=9,2048 root=ubi:SYSTEM rw rootfstype=ubifs init=/linuxrc rootwait=1
+
+nvrservice$(RESOUCE)   = $(OUTPUTDIR)/tvconfig/config
+nvrservice$(FSTYPE)    = ubifs
+nvrservice$(PATSIZE)   = 0x2000000
+nvrservice$(MOUNTDIR)  = /tvconfig
+nvrservice$(OPTIONS)   = rw
+
+customer$(RESOUCE)   = $(OUTPUTDIR)/customer
+customer$(FSTYPE)    = ubifs
+customer$(PATSIZE)   = 0x4000000
+customer$(MOUNTDIR)  = /customer
+customer$(OPTIONS)   = rw

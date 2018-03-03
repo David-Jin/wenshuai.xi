@@ -1,0 +1,38 @@
+IMAGE_LIST = kernel rootfs nvrservice vendor customer
+
+FLASH_TYPE = nand
+UBI_MLC_TYPE = 1
+PAT_TABLE  = spi
+BUSYBOX    = busybox-1.20.2-arm-buildroot-linux-uclibcgnueabi-uclibc
+LIBC       = libuclibc
+EXBOOTARGS   = resolution=DACOUT_1080P_60
+KERNEL_MEMADR = 0xC00000
+KERNEL_MENLEN = 0xE300000
+
+kernel$(RESOUCE)   = $(PROJ_ROOT)/release/$(CHIP)/$(BOARD)/$(TOOLCHAIN)/$(TOOLCHAIN_VERSION)/bin/kernel/$(FLASH_TYPE)/uImage
+kernel$(PATSIZE)   = 0x600000
+kernel$(BOOTENV)   = LX_MEM=0xE300000 EMAC_MEM=0x100000 mma_heap=mma_heap_name0,miu=0,sz=0x6900000
+
+
+rootfs$(RESOUCE)   = $(OUTPUTDIR)/rootfs
+rootfs$(FSTYPE)    = squashfs
+rootfs$(PATSIZE)   = 0x2000000
+rootfs$(BOOTENV)   = ubi.mtd=UBI root=/dev/mtdblock4 rootfstype=squashfs ro init=/linuxrc
+
+nvrservice$(RESOUCE)   = $(OUTPUTDIR)/tvconfig/config
+nvrservice$(FSTYPE)    = ubifs
+nvrservice$(PATSIZE)   = 0x2000000
+nvrservice$(MOUNTDIR)  = /tvconfig
+nvrservice$(OPTIONS)   = rw
+
+vendor$(RESOUCE)   = $(OUTPUTDIR)/vendor
+vendor$(FSTYPE)    = ubifs
+vendor$(PATSIZE)   = 0x500000
+vendor$(MOUNTDIR)  = /vendor
+vendor$(OPTIONS)   = rw
+
+customer$(RESOUCE)   = $(OUTPUTDIR)/customer
+customer$(FSTYPE)    = ubifs
+customer$(PATSIZE)   = 0x500000
+customer$(MOUNTDIR)  = /customer
+customer$(OPTIONS)   = rw
